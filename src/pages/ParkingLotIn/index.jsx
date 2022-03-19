@@ -1,26 +1,41 @@
 import { useEffect, useState } from "react";
-import { ButtonContainer } from "../Button/styles";
-import { ParkingLotSelect, } from "../ParkingLotSelect";
-import { Container, InputParkingLot } from "./styles";
+
+import { useNavigate } from "react-router-dom";
+import { InputPlate } from "../../components/InputPlate";
+import { Container } from "./styles";
 import Alert from '../../assets/ic_arlert.svg'
 import { api } from "../../service/api";
+import {ButtonContainer} from '../../components/Button/styles'
 
-export function ParkingLot() {
+export function ParkingLotIn() {
+
     const [input,setInput]= useState('')
-    const[activeButton,setActiveButton]=useState(false)
+    const [activeButton,setActiveButton]=useState(false)
     const [error,setError]=useState()
+
+    const navigate= useNavigate()
+
     useEffect(()=>{
         if(input.length===8){
             setActiveButton(true)
         }
+        setError('')
     },[input])
     
+    console.log(activeButton)
     const handleParkingLot=async()=>{
         try{
+           
                await api.post('parking',{
                 plate:input
             })
-           
+             navigate('/loading')
+            
+            setTimeout(() => {
+                navigate('/success')
+              }, 1000);
+            
+            
         }catch(err){
             setError(err.response.data.errors.plate)
         }
@@ -28,17 +43,13 @@ export function ParkingLot() {
 
         
     }
-    console.log(error)
     return (
         <Container>
-            <ParkingLotSelect />
-            <label>Número da placa:</label>
-            <InputParkingLot 
-            value={input}
-            onChange={(e)=>setInput(e.target.value)}
-            type="text" 
-            placeholder="AAA-0000" 
-            style={error?{color:'red'}:{}}
+            <InputPlate 
+            input={input} 
+            setInput={setInput}
+            error={error}
+            setError={setError}
             />
           
             {error?
@@ -53,7 +64,8 @@ export function ParkingLot() {
             >
                 CONFIRMAR ENTRADA
             </ButtonContainer>
+            
         </Container>
-
+        
     )
 }
