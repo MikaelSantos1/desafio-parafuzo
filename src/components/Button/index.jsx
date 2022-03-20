@@ -1,8 +1,8 @@
 import { ButtonContainer } from "./styles"
 
-export function Button({children}){
+export function Button({children,...rest}){
     
     return(
-        <ButtonContainer >{children} </ButtonContainer>
+        <ButtonContainer {...rest} >{children} </ButtonContainer>
     )
 }

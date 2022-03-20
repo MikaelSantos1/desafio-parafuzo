@@ -27,7 +27,13 @@ export function ParkingLotIn() {
         
     },[input])
     
-    console.log(loading,done)
+    useEffect(()=>{
+        if(error){
+            setLoading(false)
+        }
+        
+    },[error])
+    
     const handleParkingLot=async()=>{
         try{
                setLoading(true)
@@ -50,6 +56,7 @@ export function ParkingLotIn() {
 
         
     }
+    console.log(error)
     return (
         <Container>
            { 
