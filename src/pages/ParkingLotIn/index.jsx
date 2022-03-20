@@ -6,13 +6,17 @@ import { Container } from "./styles";
 import Alert from '../../assets/ic_arlert.svg'
 import { api } from "../../service/api";
 import {ButtonContainer} from '../../components/Button/styles'
+import { LoadScreen } from "../../components/LoadScreen";
+import { Checked } from "../../components/Checked";
 
 export function ParkingLotIn() {
 
     const [input,setInput]= useState('')
     const [activeButton,setActiveButton]=useState(false)
     const [error,setError]=useState()
+    const [loading,setLoading]=useState(false)
 
+    const [done,setDone]=useState(false)
     const navigate= useNavigate()
 
     useEffect(()=>{
@@ -20,21 +24,24 @@ export function ParkingLotIn() {
             setActiveButton(true)
         }
         setError('')
+        
     },[input])
     
-    console.log(activeButton)
+    console.log(loading,done)
     const handleParkingLot=async()=>{
         try{
-           
+               setLoading(true)
                await api.post('parking',{
                 plate:input
             })
-             navigate('/loading')
-            
             setTimeout(() => {
-                navigate('/success')
+                setLoading(false)
+                setDone(true)
               }, 1000);
-            
+              setTimeout(() => {
+                setDone(false)
+              }, 3000);
+              
             
         }catch(err){
             setError(err.response.data.errors.plate)
@@ -45,7 +52,10 @@ export function ParkingLotIn() {
     }
     return (
         <Container>
-            <InputPlate 
+           { 
+           loading ===false && done===false?(
+               <>
+           <InputPlate 
             input={input} 
             setInput={setInput}
             error={error}
@@ -64,6 +74,13 @@ export function ParkingLotIn() {
             >
                 CONFIRMAR ENTRADA
             </ButtonContainer>
+            </>)
+            : loading===true && done===false ?<LoadScreen>Teste</LoadScreen>
+            :<Checked/>
+           }
+
+           
+           
             
         </Container>
         

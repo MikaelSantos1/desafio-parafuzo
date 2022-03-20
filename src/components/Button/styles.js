@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 const colors ={
     green:'#28DD91',
-    purple:'#A769B2'
+    purple:'#A769B2',
+    white:"#FFFFFF"
 };
 export const ButtonContainer= styled.button`
     
