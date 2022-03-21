@@ -2,13 +2,20 @@ import styled from 'styled-components'
 
 export const Container= styled.div`
 width:100%;
-height:361px;
+height:362px;
 border-radius: 0px 0px 4px 4px;
 background-color:#FFFFFF;
-display:flex;
-flex-direction:column;
+
 margin-top:41px;
-padding:0 16px;
+label{
+        margin-left:16px;
+        margin-top:35px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #9B9B9B;
+        display:block;
+    }
 
 .error{
     width:100%;
@@ -23,6 +30,7 @@ padding:0 16px;
     }
 }
     label{
+        margin-left:16px;
         margin-top:35px;
         font-weight: 400;
         font-size: 16px;
@@ -35,7 +43,7 @@ export const InputParkingLot=styled.input`
     max-width:312px;
     width:100%;
     height:67px;
-    margin:0 auto;
+   margin-right:12px;
    
     border:none;
     outline:0;
@@ -46,5 +54,15 @@ export const InputParkingLot=styled.input`
     text-align: center;
 
 color: #0A261D;
+
+`
+
+export const ContentContainer= styled.div`
+background-color:#FFFFFF;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
 
 `

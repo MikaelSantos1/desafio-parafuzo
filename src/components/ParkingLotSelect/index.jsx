@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { ButtonParkingLot, ContainerButton } from "./styles"
 import { Link } from "react-router-dom"
-export function ParkingLotSelect() {
+export function ParkingLotSelect({initialType}) {
 
-    const [type, setType] = useState('input')
+    const [type, setType] = useState(initialType)
     return (
 
         <ContainerButton>

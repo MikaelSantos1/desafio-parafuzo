@@ -4,13 +4,13 @@ import { Button } from "../../Button"
 import { Container } from "../styles"
 import { LoadScreen } from "../../LoadScreen"
 import { Checked } from '../../Checked'
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import { api } from "../../../service/api"
-
+import { usePlate } from "../../../hooks/Context/UserPlate"
 export function NewPaymentModal({
     isOpen,
     onRequestClose,
-    input,
+    
     text,
     buttonText,
     error,
@@ -18,19 +18,13 @@ export function NewPaymentModal({
 }) {
     const [loading, setLoading] = useState(false)
     const [done, setDone] = useState(false)
-    const [isPayed,setIsPayed]=useState(false)
-    useEffect(() => {
-       
-        if (error) {
-            setLoading(false)
-            onRequestClose()
-        }
-    }, [error])
+
+    const {plate}=usePlate()
 
     const handlePayment = async () => {
         try {
             setLoading(true)
-            await api.post(`parking/${input}/pay`)
+            await api.post(`parking/${plate}/pay`)
 
             setTimeout(() => {
                 setLoading(false)
@@ -40,9 +34,11 @@ export function NewPaymentModal({
                 onRequestClose()
                 setDone(false)
             }, 3000);
-            setIsPayed(true)
+            
         } catch (err) {
             setError(err.response.data.errors.plate)
+            setLoading(false)
+            onRequestClose()
         }
 
 
@@ -60,7 +56,7 @@ export function NewPaymentModal({
                     loading === false && done === false ?
                         <>
                             <p className="payment-modal">{text}</p>
-                            <h1>{input}</h1>
+                            <h1>{plate}</h1>
 
                             <Button
                                 activeColor="purple"

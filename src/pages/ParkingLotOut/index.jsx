@@ -1,117 +1,131 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
-import { Container, InputParkingLot } from "./styles";
+import { Container, ContentContainer } from "./styles";
 import Alert from '../../assets/ic_arlert.svg'
-import { api } from "../../service/api";
-import { ButtonContainer } from "../../components/Button/styles";
+import { ParkingLotSelect } from "../../components/ParkingLotSelect";
 import { NewPaymentModal } from "../../components/Modal/NewPaymentModal";
 import { NewExitModal } from "../../components/Modal/NewExitModal";
+import { InputPlate } from "../../components/InputPlate";
+import  {usePlate} from '../../hooks/Context/UserPlate'
 Modal.setAppElement('#root')
 
 export function ParkingLotOut() {
+    const{ plate,setPlate} = usePlate()
+    
+    const [activeButton, setActiveButton] = useState(false)
+    const [error, setError] = useState()
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
+    const [isExitModalOpen, setIsExitModalOpen] = useState(false)
 
-    const [input,setInput]= useState('')
-    const [activeButton,setActiveButton]=useState(false)
-    const [error,setError]=useState()
-    const [isPaymentModalOpen,setIsPaymentModalOpen]=useState(false)
-    const [isExitModalOpen,setIsExitModalOpen]=useState(false)
-    const [done,setDone]=useState(false)
 
-   
-    function handleOpenPaymentModal(){
+
+    function handleOpenPaymentModal() {
         setIsPaymentModalOpen(true)
     }
-    function handleClosePaymentModal(){
+    function handleClosePaymentModal() {
         setIsPaymentModalOpen(false)
     }
 
-    function handleOpenExitModal(){
+    function handleOpenExitModal() {
         setIsExitModalOpen(true)
     }
-    function handleCloseExitModal(){
+    function handleCloseExitModal() {
         setIsExitModalOpen(false)
     }
-useEffect(()=>{
-    if(done===true){
-        setIsExitModalOpen(true)
-        setIsPaymentModalOpen(false)
-    }  
-},[done])
-    
 
-    useEffect(()=>{
-        if(input.length===8){
+
+    useEffect(() => {
+        if (plate.length === 8) {
             setActiveButton(true)
         }
-        else{
+        else {
             setActiveButton(false)
         }
         setError('')
-    },[input])
-    
-    
-    
+    }, [plate])
+
+
+
     return (
+
         <Container>
+            <ParkingLotSelect initialType={'output'} />
             <label>Número da placa:</label>
-            <InputParkingLot 
-            value={input}
-            onChange={(e)=>setInput(e.target.value)}
-            type="text" 
-            placeholder="AAA-0000" 
-            style={error?{color:'red'}:{}}
-            />
-          
-            {error?
-                <div className="error"><img src={Alert} alt="alerta" />{error} </div>
-                :''
-                 
-            } 
-            <Button 
-            onClick={handleOpenPaymentModal}
-            handleClosePaymentModal={handleClosePaymentModal}
-            isButtonActive={activeButton}
-            activeColor="purple"
-            >
-                Pagamento
-            </Button>
+            <ContentContainer>
 
 
-            <Button 
-            onClick={handleOpenExitModal}
-            
-            isButtonActive={true}
-            activeColor="white"
-            style={{color:'#A769B2',border:'2px solid #A769B2'}}
-            >
-                SAÍDA
-            </Button>
 
-           <NewPaymentModal 
-           input={input}
-           isOpen={isPaymentModalOpen}
-           onRequestClose={handleClosePaymentModal}
-           text='Confima o pagamento da placa abaixo?'
-           buttonText="Confirmar"
-            error={error}
-            setError={setError}
-        
-          
-           />
+                <InputPlate
+                    value={plate}
+                    setInput={setPlate}
+                    onChange={(e) => setPlate(e.target.value)}
+                    type="text"
+                    placeholder="AAA-0000"
+                    style={error ? { color: 'red' } : {}}
+                />
 
-        <NewExitModal 
-           input={input}
-           isOpen={isExitModalOpen}
-           onRequestClose={handleCloseExitModal}
-           text='Confirma a saída do veiculo da placa abaixo?'
-           buttonText="Liberar Saída"
-           error={error}
-           setError={setError}
-           />
+                {error ?
+                    <div className="error"><img src={Alert} alt="alerta" />{error} </div>
+                    : ''
 
+                }
+                <Button
+                    onClick={handleOpenPaymentModal}
+                    handleClosePaymentModal={handleClosePaymentModal}
+                    isButtonActive={activeButton}
+                    disabled={!activeButton}
+                    activeColor="purple"
+                >
+                    Pagamento
+                </Button>
+
+
+                <Button
+                    onClick={handleOpenExitModal}
+                    disabled={!activeButton}
+                    isButtonActive={true}
+                    activeColor="white"
+                    style={{ color: '#A769B2', border: '2px solid #A769B2' }}
+                >
+                    SAÍDA
+                </Button>
+                <Link to='/historic'>
+                    <Button
+                        disabled={!activeButton}
+                        isButtonActive={true}
+                        activeColor="white"
+                        style={{ color: '#00BCD4' }}
+                    >
+                        Ver Histórico
+                    </Button>
+                </Link>
+
+                <NewPaymentModal
+                    input={plate}
+                    isOpen={isPaymentModalOpen}
+                    onRequestClose={handleClosePaymentModal}
+                    text='Confima o pagamento da placa abaixo?'
+                    buttonText="Confirmar"
+                    error={error}
+                    setError={setError}
+
+
+                />
+
+                <NewExitModal
+                    input={plate}
+                    isOpen={isExitModalOpen}
+                    onRequestClose={handleCloseExitModal}
+                    text='Confirma a saída do veiculo da placa abaixo?'
+                    buttonText="Liberar Saída"
+                    error={error}
+                    setError={setError}
+                />
+            </ContentContainer>
         </Container>
-        
+
+
     )
 }

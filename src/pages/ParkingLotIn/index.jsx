@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
-
+import { usePlate } from "../../hooks/Context/UserPlate";
 import { InputPlate } from "../../components/InputPlate";
-import { Container } from "./styles";
+import { Container,ContentContainer} from "./styles";
 import Alert from '../../assets/ic_arlert.svg'
 import { api } from "../../service/api";
-import {ButtonContainer} from '../../components/Button/styles'
+import {Button} from '../../components/Button'
 import { LoadScreen } from "../../components/LoadScreen";
 import { Checked } from "../../components/Checked";
-
+import { ParkingLotSelect } from "../../components/ParkingLotSelect";
 
 export function ParkingLotIn() {
-    
+    const {plate,setPlate}=usePlate()
   
     const [activeButton,setActiveButton]=useState(false)
     const [error,setError]=useState()
     const [loading,setLoading]=useState(false)
-    const [input,setInput]=useState('')
+   
     const [done,setDone]=useState(false)
   
     
     useEffect(()=>{
-        if(input.length===8){
+        if(plate.length===8){
             setActiveButton(true)
         }else{
             setActiveButton(false)
         }
         setError('')
         
-    },[input])
+    },[plate])
     
     useEffect(()=>{
         if(error){
@@ -42,7 +42,7 @@ export function ParkingLotIn() {
         try{
                setLoading(true)
                await api.post('parking',{
-                plate:input
+                plate:plate
             })
             setTimeout(() => {
                 setLoading(false)
@@ -60,18 +60,21 @@ export function ParkingLotIn() {
 
         
     }
-    console.log(activeButton)
+  
     return (
         <Container  >
+              <ParkingLotSelect initialType="input"/>
            { 
            loading ===false && done===false?(
                <>
+            <label>Número da placa:</label>
+               <ContentContainer>
+                  
            <InputPlate 
-             value={input}
-             
+             value={plate}
             error={error}
             setError={setError}
-            setInput={setInput}
+            setInput={setPlate}
             />
           
             {error?
@@ -79,14 +82,15 @@ export function ParkingLotIn() {
                 :''
                  
             } 
-            <ButtonContainer 
+            <Button 
             isButtonActive={activeButton}
             activeColor="green"
             disabled={!activeButton}
-            onClick={()=>{console.log('cliquei')}}
+            onClick={handleParkingLot}
             >
                 CONFIRMAR ENTRADA
-            </ButtonContainer>
+            </Button>
+            </ContentContainer>
             </>)
             : loading===true && done===false ?<LoadScreen>Teste</LoadScreen>
             :<Checked/>

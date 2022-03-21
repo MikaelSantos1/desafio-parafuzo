@@ -1,13 +1,13 @@
-import { InputParkingLot,Form } from "./styles"
-import { useForm } from "react-hook-form";
-export function InputPlate({input,setInput,error,setError,...rest}) {
-   
+import { InputParkingLot } from "./styles"
+import { usePlate } from "../../hooks/Context/UserPlate"
+export function InputPlate({error,setError,...rest}) {
+   const {plate,setPlate}=usePlate()
     return (
         <>
-            <label>Número da placa:</label>
+          
             <InputParkingLot
-                 value={input}
-                 onChange={(e) => setInput(e.target.value)}
+                 value={plate}
+                 onChange={(e) => setPlate(e.target.value)}
                  type="text"
                  placeholder="AAA-0000"
                  style={error ? { color: 'red' } : {}}

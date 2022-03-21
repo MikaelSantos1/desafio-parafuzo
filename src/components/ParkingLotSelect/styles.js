@@ -8,7 +8,6 @@ export const Container=styled.div`
 export const ContainerButton= styled.div`
 
     display:flex;
-   
 `
 export const ButtonParkingLot = styled.button`
         height:48px;

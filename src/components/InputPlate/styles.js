@@ -5,7 +5,7 @@ export const InputParkingLot=styled.input`
     max-width:312px;
     width:100%;
     height:67px;
-    margin:0 auto;
+    margin-right:12px;
    
     border:none;
     outline:0;
