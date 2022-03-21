@@ -95,8 +95,9 @@ useEffect(()=>{
            onRequestClose={handleClosePaymentModal}
            text='Confima o pagamento da placa abaixo?'
            buttonText="Confirmar"
-           done={done}
-           setDone={setDone}
+            error={error}
+            setError={setError}
+        
           
            />
 
@@ -106,7 +107,8 @@ useEffect(()=>{
            onRequestClose={handleCloseExitModal}
            text='Confirma a saída do veiculo da placa abaixo?'
            buttonText="Liberar Saída"
-          
+           error={error}
+           setError={setError}
            />
 
         </Container>

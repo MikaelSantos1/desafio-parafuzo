@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { InputPlate } from "../../components/InputPlate";
 import { Container } from "./styles";
 import Alert from '../../assets/ic_arlert.svg'
@@ -9,19 +8,22 @@ import {ButtonContainer} from '../../components/Button/styles'
 import { LoadScreen } from "../../components/LoadScreen";
 import { Checked } from "../../components/Checked";
 
-export function ParkingLotIn() {
 
-    const [input,setInput]= useState('')
+export function ParkingLotIn() {
+    
+  
     const [activeButton,setActiveButton]=useState(false)
     const [error,setError]=useState()
     const [loading,setLoading]=useState(false)
-
+    const [input,setInput]=useState('')
     const [done,setDone]=useState(false)
-    const navigate= useNavigate()
-
+  
+    
     useEffect(()=>{
         if(input.length===8){
             setActiveButton(true)
+        }else{
+            setActiveButton(false)
         }
         setError('')
         
@@ -33,8 +35,10 @@ export function ParkingLotIn() {
         }
         
     },[error])
+  
     
-    const handleParkingLot=async()=>{
+    const handleParkingLot=async(data)=>{
+        
         try{
                setLoading(true)
                await api.post('parking',{
@@ -56,17 +60,18 @@ export function ParkingLotIn() {
 
         
     }
-    console.log(error)
+    console.log(activeButton)
     return (
-        <Container>
+        <Container  >
            { 
            loading ===false && done===false?(
                <>
            <InputPlate 
-            input={input} 
-            setInput={setInput}
+             value={input}
+             
             error={error}
             setError={setError}
+            setInput={setInput}
             />
           
             {error?
@@ -75,9 +80,10 @@ export function ParkingLotIn() {
                  
             } 
             <ButtonContainer 
-            onClick={handleParkingLot}
             isButtonActive={activeButton}
             activeColor="green"
+            disabled={!activeButton}
+            onClick={()=>{console.log('cliquei')}}
             >
                 CONFIRMAR ENTRADA
             </ButtonContainer>
@@ -89,7 +95,7 @@ export function ParkingLotIn() {
            
            
             
-        </Container>
+        </Container >
         
     )
 }

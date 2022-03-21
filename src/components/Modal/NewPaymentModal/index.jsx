@@ -1,23 +1,31 @@
 import Modal from "react-modal/lib/components/Modal"
-import { ButtonContainer } from "../../Button/styles"
+
 import { Button } from "../../Button"
 import { Container } from "../styles"
 import { LoadScreen } from "../../LoadScreen"
 import { Checked } from '../../Checked'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { api } from "../../../service/api"
+
 export function NewPaymentModal({
     isOpen,
     onRequestClose,
     input,
     text,
     buttonText,
-
-
-
+    error,
+    setError
 }) {
     const [loading, setLoading] = useState(false)
     const [done, setDone] = useState(false)
+    const [isPayed,setIsPayed]=useState(false)
+    useEffect(() => {
+       
+        if (error) {
+            setLoading(false)
+            onRequestClose()
+        }
+    }, [error])
 
     const handlePayment = async () => {
         try {
@@ -29,10 +37,12 @@ export function NewPaymentModal({
                 setDone(true)
             }, 1000);
             setTimeout(() => {
+                onRequestClose()
                 setDone(false)
             }, 3000);
-        } catch (error) {
-            console.log(error)
+            setIsPayed(true)
+        } catch (err) {
+            setError(err.response.data.errors.plate)
         }
 
 
@@ -68,17 +78,10 @@ export function NewPaymentModal({
                             >
                                 Voltar
                             </Button>
-                        </> : loading === true && done === false ? <LoadScreen>Teste</LoadScreen>
-                            : <Checked />
+                        </> : loading === true && done === false ? <LoadScreen>Confirmando...</LoadScreen>
+                            : <Checked>PAGO!</Checked>
                 }
-
-
-
             </Container>
-
-
-
-
         </Modal>
     )
 }

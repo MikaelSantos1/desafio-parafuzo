@@ -4,12 +4,13 @@ import { Container } from "../styles"
 import { LoadScreen } from "../../LoadScreen"
 import {Button} from '../../Button'
 import { useState } from "react"
+import { api } from "../../../service/api"
 export function NewExitModal({ isOpen, onRequestClose, input ,text,buttonText}) {
    
     const [load, setLoad] = useState(false)
 
-    function handleTeste() {
-        
+    function handleExit() {
+        api.post(`parking/${input}/out`)
     }
     console.log(load)
     return (

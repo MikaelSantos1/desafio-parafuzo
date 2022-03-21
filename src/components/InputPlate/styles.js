@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-
+export const Form= styled.form``
 export const InputParkingLot=styled.input`
     max-width:312px;
     width:100%;
