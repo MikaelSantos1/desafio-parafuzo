@@ -7,6 +7,7 @@ export const Container= styled.header`
     padding: 0 8px;
     display:flex;
     justify-content:space-between;
+    align-items:center;
     div{
        z-index:50;
         display:flex;
