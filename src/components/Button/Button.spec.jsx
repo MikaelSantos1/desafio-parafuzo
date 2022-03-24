@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { screen, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Button } from '.'
@@ -10,7 +11,8 @@ describe('Button component', () => {
                 CONFIRMAR ENTRADA
             </Button>)
     
+    const button= screen.getByText('CONFIRMAR ENTRADA')
     expect(screen.getByText('CONFIRMAR ENTRADA')).toBeInTheDocument()
-    
+    expect(button).toHaveStyle('background-color:#28DD91')
     })
 })

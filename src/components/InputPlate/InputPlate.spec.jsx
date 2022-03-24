@@ -1,3 +1,4 @@
+import * as React from 'react';
 import '@testing-library/jest-dom'
 import { render, screen ,getElementByRole} from '@testing-library/react'
 import UserPlateProvider, { usePlate } from '../../hooks/Context/UserPlate'
