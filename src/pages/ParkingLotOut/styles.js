@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Container= styled.div`
 width:100%;
-height:362px;
 border-radius: 0px 0px 4px 4px;
 background-color:#FFFFFF;
 
@@ -43,7 +42,7 @@ export const InputParkingLot=styled.input`
     max-width:312px;
     width:100%;
     height:67px;
-   margin-right:12px;
+    margin: 0 auto ;
    
     border:none;
     outline:0;

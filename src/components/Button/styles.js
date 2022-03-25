@@ -13,7 +13,7 @@ export const ButtonContainer= styled.button`
     line-height: 18px;
     border:none;
     border-radius: 4px;
-    margin-right:  12px;
+    margin: 0 auto ;
     margin-top:13px;
     color:#FFFF;
     background:${(props)=>props.isButtonActive 
