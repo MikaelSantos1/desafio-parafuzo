@@ -33,8 +33,9 @@ export function NewPaymentModal({
             setTimeout(() => {
                 onRequestClose()
                 setDone(false)
+                
             }, 3000);
-            
+            setError('')
         } catch (err) {
             setError(err.response.data.errors.plate)
             setLoading(false)

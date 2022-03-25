@@ -92,8 +92,8 @@ export function ParkingLotIn() {
             </Button>
             </ContentContainer>
             </>)
-            : loading===true && done===false ?<LoadScreen>Teste</LoadScreen>
-            :<Checked/>
+            : loading===true && done===false ?<LoadScreen>Registrando...</LoadScreen>
+            :<Checked>Registrado!</Checked>
            }
 
            
