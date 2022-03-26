@@ -3,7 +3,7 @@
 
 1. Clone o repositorio
    ```sh
-   git clone https://github.com/MikaelSantos1/disneyplus_clone.git
+   git clone https://github.com/MikaelSantos1/desafio-parafuzo.git
    ```
 2. Instale as  depencias
    ```sh
