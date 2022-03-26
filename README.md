@@ -1,10 +1,3 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### Instalação
 
@@ -14,17 +7,17 @@ In the project directory, you can run:
    ```
 2. Instale as  depencias
    ```sh
-   yarn
+   yarn  ou npm install
    ```
 3. Inicie o projeto
-   ```js
-  yarn start
+  ```sh
+   yarn start  ou npm run start
    ```
+4. Acesse localhost:3000
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Deploy
+Link da aplicação rodando:
+https://mikael-teste-parafuzo.netlify.app
 
 ### 🚀 Tecnologias e ferramentas
 
