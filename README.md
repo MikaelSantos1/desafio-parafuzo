@@ -27,3 +27,9 @@ https://mikael-teste-parafuzo.netlify.app
 * React-Modal
 * Axios                                                                                        
 * React router dom
+
+### Dificuldades:
+Tive dificuldade em desenvolver teste unitarios, eu ainda estou me estudando e me aprimorando nesse aspecto.
+
+
+Feito com ❤ por Mikael Santos
