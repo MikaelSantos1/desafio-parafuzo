@@ -12,6 +12,8 @@ export const Container = styled.main`
     justify-content:space-around;
     width:100%;
     }
+
+    
    
 `
 export const TitleContainer = styled.div`
@@ -27,6 +29,7 @@ export const TitleContainer = styled.div`
     color: #00BCD4;
     text-transform:uppercase;
     }
+    
 `
 
 export const Card = styled.div`

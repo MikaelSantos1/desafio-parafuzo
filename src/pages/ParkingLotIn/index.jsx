@@ -38,7 +38,7 @@ export function ParkingLotIn() {
   
     
     const handleParkingLot=async()=>{
-        console.log('teste')
+       
         try{
                setLoading(true)
                await api.post('parking',{

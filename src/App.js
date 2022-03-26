@@ -3,7 +3,7 @@ import { ParkingLotIn } from "./pages/ParkingLotIn";
 import { ParkingLotOut } from "./pages/ParkingLotOut";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { ParkingLotSelect } from './components/ParkingLotSelect'
+
 import { Historic } from "./pages/Historic";
 import UserPlateProvider from "./hooks/Context/UserPlate";
 import RegisterDetailsProvider from "./hooks/Context/RegisterDetails";

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 export function Detail() {
     const { registerDetails } = useRegisterDetails()
     const{ placa,time,status}=registerDetails
-    console.log(registerDetails)
+   
     return (
         <Container>
             <Link to ='/historic'>

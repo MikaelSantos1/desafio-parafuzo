@@ -13,7 +13,7 @@ export function Historic() {
     useEffect(() => {
         const fetchHistoricData = async () => {
             const { data } = await api.get(`parking/${plate}`)
-            console.log(data)
+         
             const formatedValues =
                 data.map((data) => {
                     return {
@@ -31,7 +31,7 @@ export function Historic() {
             setHistoric(formatedValues)
         }
         fetchHistoricData()
-    }, [])
+    }, [plate])
 
 
 
