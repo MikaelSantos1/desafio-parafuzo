@@ -14,7 +14,7 @@ In the project directory, you can run:
    ```
 2. Instale as  depencias
    ```sh
-  yarn
+   yarn
    ```
 3. Inicie o projeto
    ```js
